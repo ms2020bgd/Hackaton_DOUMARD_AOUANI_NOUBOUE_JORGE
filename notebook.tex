@@ -1,0 +1,1469 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{NOUBOUE}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \#
+
+ GDP :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}EG.ELC.ACCS.ZS\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}427235.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df\PYZus{}GDP} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}NY.GDP.MKTP.CD\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}422026.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df\PYZus{}GDP}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}   Country Name Country Code     Indicator Name  Indicator Code          1960  \textbackslash{}
+        0        Aruba          ABW  GDP (current US\$)  NY.GDP.MKTP.CD           NaN   
+        1  Afghanistan          AFG  GDP (current US\$)  NY.GDP.MKTP.CD  5.377778e+08   
+        2       Angola          AGO  GDP (current US\$)  NY.GDP.MKTP.CD           NaN   
+        3      Albania          ALB  GDP (current US\$)  NY.GDP.MKTP.CD           NaN   
+        4      Andorra          AND  GDP (current US\$)  NY.GDP.MKTP.CD           NaN   
+        
+                   1961          1962          1963          1964          1965  \textbackslash{}
+        0           NaN           NaN           NaN           NaN           NaN   
+        1  5.488889e+08  5.466667e+08  7.511112e+08  8.000000e+08  1.006667e+09   
+        2           NaN           NaN           NaN           NaN           NaN   
+        3           NaN           NaN           NaN           NaN           NaN   
+        4           NaN           NaN           NaN           NaN           NaN   
+        
+              {\ldots}               2011          2012          2013          2014  \textbackslash{}
+        0     {\ldots}       2.549721e+09  2.534637e+09  2.581564e+09  2.649721e+09   
+        1     {\ldots}       1.780428e+10  2.000162e+10  2.056105e+10  2.048487e+10   
+        2     {\ldots}       1.117897e+11  1.280529e+11  1.367099e+11  1.457122e+11   
+        3     {\ldots}       1.289087e+10  1.231978e+10  1.277628e+10  1.322825e+10   
+        4     {\ldots}       3.442063e+09  3.164615e+09  3.281585e+09  3.350736e+09   
+        
+                   2015          2016          2017          2018  2019  Unnamed: 64  
+        0  2.691620e+09  2.646927e+09  2.700559e+09           NaN   NaN          NaN  
+        1  1.990711e+10  1.936264e+10  2.019176e+10  1.936297e+10   NaN          NaN  
+        2  1.161936e+11  1.011239e+11  1.221238e+11  1.057510e+11   NaN          NaN  
+        3  1.138693e+10  1.186135e+10  1.302506e+10  1.505888e+10   NaN          NaN  
+        4  2.811489e+09  2.877312e+09  3.013387e+09  3.236544e+09   NaN          NaN  
+        
+        [5 rows x 65 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{metadata\PYZus{}countries} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/Metadata\PYZus{}Country\PYZus{}API\PYZus{}EG.ELC.ACCS.ZS\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}427235.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{metadata\PYZus{}countries}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}   Country Code                     Region          IncomeGroup SpecialNotes  \textbackslash{}
+         0          ABW  Latin America \& Caribbean          High income          NaN   
+         1          AFG                 South Asia           Low income          NaN   
+         2          AGO         Sub-Saharan Africa  Lower middle income          NaN   
+         3          ALB      Europe \& Central Asia  Upper middle income          NaN   
+         4          AND      Europe \& Central Asia          High income          NaN   
+         
+              TableName  Unnamed: 5  
+         0        Aruba         NaN  
+         1  Afghanistan         NaN  
+         2       Angola         NaN  
+         3      Albania         NaN  
+         4      Andorra         NaN  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df\PYZus{}GDP}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{metadata\PYZus{}countries}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:}   Country Name Country Code     Indicator Name  Indicator Code          1960  \textbackslash{}
+         0        Aruba          ABW  GDP (current US\$)  NY.GDP.MKTP.CD           NaN   
+         1  Afghanistan          AFG  GDP (current US\$)  NY.GDP.MKTP.CD  5.377778e+08   
+         2       Angola          AGO  GDP (current US\$)  NY.GDP.MKTP.CD           NaN   
+         3      Albania          ALB  GDP (current US\$)  NY.GDP.MKTP.CD           NaN   
+         4      Andorra          AND  GDP (current US\$)  NY.GDP.MKTP.CD           NaN   
+         
+                    1961          1962          1963          1964          1965  \textbackslash{}
+         0           NaN           NaN           NaN           NaN           NaN   
+         1  5.488889e+08  5.466667e+08  7.511112e+08  8.000000e+08  1.006667e+09   
+         2           NaN           NaN           NaN           NaN           NaN   
+         3           NaN           NaN           NaN           NaN           NaN   
+         4           NaN           NaN           NaN           NaN           NaN   
+         
+               {\ldots}              2016          2017          2018  2019  Unnamed: 64  \textbackslash{}
+         0     {\ldots}      2.646927e+09  2.700559e+09           NaN   NaN          NaN   
+         1     {\ldots}      1.936264e+10  2.019176e+10  1.936297e+10   NaN          NaN   
+         2     {\ldots}      1.011239e+11  1.221238e+11  1.057510e+11   NaN          NaN   
+         3     {\ldots}      1.186135e+10  1.302506e+10  1.505888e+10   NaN          NaN   
+         4     {\ldots}      2.877312e+09  3.013387e+09  3.236544e+09   NaN          NaN   
+         
+                               Region          IncomeGroup  SpecialNotes    TableName  \textbackslash{}
+         0  Latin America \& Caribbean          High income           NaN        Aruba   
+         1                 South Asia           Low income           NaN  Afghanistan   
+         2         Sub-Saharan Africa  Lower middle income           NaN       Angola   
+         3      Europe \& Central Asia  Upper middle income           NaN      Albania   
+         4      Europe \& Central Asia          High income           NaN      Andorra   
+         
+            Unnamed: 5  
+         0         NaN  
+         1         NaN  
+         2         NaN  
+         3         NaN  
+         4         NaN  
+         
+         [5 rows x 70 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:}                                     1960          1961          1962  \textbackslash{}
+         Region                                                                 
+         East Asia \& Pacific         1.464117e+11  1.466530e+11  1.499091e+11   
+         Europe \& Central Asia       2.834935e+11  3.017402e+11  3.299221e+11   
+         Latin America \& Caribbean   5.739650e+10  6.076983e+10  9.396298e+10   
+         Middle East \& North Africa  1.410026e+10  1.480286e+10  1.464984e+10   
+         North America               5.433845e+11  6.049452e+11  6.480622e+11   
+         
+                                             1963          1964          1965  \textbackslash{}
+         Region                                                                 
+         East Asia \& Pacific         1.672525e+11  1.921180e+11  2.144489e+11   
+         Europe \& Central Asia       3.638094e+11  4.028910e+11  4.384373e+11   
+         Latin America \& Caribbean   9.482963e+10  1.056766e+11  1.139804e+11   
+         Middle East \& North Africa  1.646011e+10  1.817289e+10  2.611756e+10   
+         North America               6.844095e+11  7.360342e+11  7.991566e+11   
+         
+                                             1966          1967          1968  \textbackslash{}
+         Region                                                                 
+         East Asia \& Pacific         2.397578e+11  2.652445e+11  2.920148e+11   
+         Europe \& Central Asia       4.762716e+11  5.124271e+11  5.344567e+11   
+         Latin America \& Caribbean   1.250137e+11  1.283074e+11  1.381940e+11   
+         Middle East \& North Africa  2.746475e+10  2.945480e+10  3.976426e+10   
+         North America               8.771493e+11  9.285200e+11  1.015570e+12   
+         
+                                             1969      {\ldots}               2009  \textbackslash{}
+         Region                                        {\ldots}                      
+         East Asia \& Pacific         3.363400e+11      {\ldots}       1.410704e+13   
+         Europe \& Central Asia       5.867793e+11      {\ldots}       2.046299e+13   
+         Latin America \& Caribbean   1.547571e+11      {\ldots}       4.304209e+12   
+         Middle East \& North Africa  4.424300e+10      {\ldots}       2.317843e+12   
+         North America               1.100414e+12      {\ldots}       1.582589e+13   
+         
+                                             2010          2011          2012  \textbackslash{}
+         Region                                                                 
+         East Asia \& Pacific         1.645754e+13  1.911055e+13  2.047535e+13   
+         Europe \& Central Asia       2.093713e+13  2.319850e+13  2.236120e+13   
+         Latin America \& Caribbean   5.337370e+12  6.072621e+12  6.135569e+12   
+         Middle East \& North Africa  2.709008e+12  3.212230e+12  3.499256e+12   
+         North America               1.661134e+13  1.733727e+13  1.802651e+13   
+         
+                                             2013          2014          2015  \textbackslash{}
+         Region                                                                 
+         East Asia \& Pacific         2.069293e+13  2.130545e+13  2.118190e+13   
+         Europe \& Central Asia       2.336925e+13  2.369537e+13  2.040889e+13   
+         Latin America \& Caribbean   6.286973e+12  6.408426e+12  5.096222e+12   
+         Middle East \& North Africa  3.477778e+12  3.493216e+12  3.079035e+12   
+         North America               1.863244e+13  1.932323e+13  1.977220e+13   
+         
+                                             2016          2017          2018  
+         Region                                                                
+         East Asia \& Pacific         2.187461e+13  2.329305e+13  2.527159e+13  
+         Europe \& Central Asia       2.034983e+13  2.149848e+13  2.300117e+13  
+         Latin America \& Caribbean   4.975906e+12  5.518414e+12  5.225616e+12  
+         Middle East \& North Africa  3.082424e+12  3.205069e+12  3.038224e+12  
+         North America               2.023389e+13  2.113226e+13  2.220661e+13  
+         
+         [5 rows x 59 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{df}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x16bdaa210f0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{}\label{section}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \#
+
+GDP PER CAPITA :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{gdp\PYZus{}per\PYZus{}capita} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}NY.GDP.PCAP.CD\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}422141.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{gdp\PYZus{}per\PYZus{}capita}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}   Country Name Country Code                Indicator Name  Indicator Code  \textbackslash{}
+         0        Aruba          ABW  GDP per capita (current US\$)  NY.GDP.PCAP.CD   
+         1  Afghanistan          AFG  GDP per capita (current US\$)  NY.GDP.PCAP.CD   
+         2       Angola          AGO  GDP per capita (current US\$)  NY.GDP.PCAP.CD   
+         3      Albania          ALB  GDP per capita (current US\$)  NY.GDP.PCAP.CD   
+         4      Andorra          AND  GDP per capita (current US\$)  NY.GDP.PCAP.CD   
+         
+                 1960       1961       1962       1963       1964        1965  \textbackslash{}
+         0        NaN        NaN        NaN        NaN        NaN         NaN   
+         1  59.773194  59.860874  58.458015  78.706388  82.095231  101.108305   
+         2        NaN        NaN        NaN        NaN        NaN         NaN   
+         3        NaN        NaN        NaN        NaN        NaN         NaN   
+         4        NaN        NaN        NaN        NaN        NaN         NaN   
+         
+               {\ldots}               2011          2012          2013          2014  \textbackslash{}
+         0     {\ldots}       24985.993281  24713.698045  25025.099563  25533.569780   
+         1     {\ldots}         591.162346    641.872034    637.165044    613.856333   
+         2     {\ldots}        4615.468028   5100.095808   5254.882338   5408.410496   
+         3     {\ldots}        4437.177794   4247.614342   4413.082887   4578.667934   
+         4     {\ldots}       41100.729938  38392.943901  40626.751632  42300.334128   
+         
+                    2015          2016          2017          2018  2019  Unnamed: 64  
+         0  25796.380251  25239.600411  25630.266492           NaN   NaN          NaN  
+         1    578.466353    547.228110    556.302139    520.896603   NaN          NaN  
+         2   4166.979684   3506.072885   4095.812942   3432.385736   NaN          NaN  
+         3   3952.830781   4124.108543   4532.889198   5253.630064   NaN          NaN  
+         4  36039.653496  37224.108916  39134.393371  42029.762737   NaN          NaN  
+         
+         [5 rows x 65 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap} \PY{o}{=} \PY{n}{gdp\PYZus{}per\PYZus{}capita}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{metadata\PYZus{}countries}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap} \PY{o}{=} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:}                                    1960         1961         1962  \textbackslash{}
+         Region                                                              
+         East Asia \& Pacific          522.624813   533.937254   544.951222   
+         Europe \& Central Asia       1150.292790  1218.420568  1311.685986   
+         Latin America \& Caribbean    396.673866   415.127294   466.399424   
+         Middle East \& North Africa   375.088016   408.704145   355.665333   
+         North America               2454.762782  2434.174770  2522.410576   
+         
+                                            1963         1964         1965  \textbackslash{}
+         Region                                                              
+         East Asia \& Pacific          592.145607   634.790004   796.316505   
+         Europe \& Central Asia       1421.599902  1590.503651  1730.067063   
+         Latin America \& Caribbean    473.590122   509.994628   516.001997   
+         Middle East \& North Africa   396.433251   430.377669   784.423575   
+         North America               2601.767681  2789.181213  2974.045130   
+         
+                                            1966         1967         1968  \textbackslash{}
+         Region                                                              
+         East Asia \& Pacific          849.709028   804.373900   858.909366   
+         Europe \& Central Asia       1873.189837  1974.352931  2013.470538   
+         Latin America \& Caribbean    545.009019   562.877151   581.856093   
+         Middle East \& North Africa   804.185981   774.244552   761.499350   
+         North America               3290.167252  3528.381335  3680.441402   
+         
+                                            1969      {\ldots}               2009  \textbackslash{}
+         Region                                       {\ldots}                      
+         East Asia \& Pacific          920.105829      {\ldots}       11517.670362   
+         Europe \& Central Asia       2192.322484      {\ldots}       30594.573082   
+         Latin America \& Caribbean    638.406977      {\ldots}        9627.737157   
+         Middle East \& North Africa   788.926413      {\ldots}       13877.869220   
+         North America               3968.968603      {\ldots}       58778.784939   
+         
+                                             2010          2011          2012  \textbackslash{}
+         Region                                                                 
+         East Asia \& Pacific         13298.665824  15332.885241  16332.057612   
+         Europe \& Central Asia       30908.387552  33909.944243  32089.480655   
+         Latin America \& Caribbean   10246.638009  11052.646899  11319.298502   
+         Middle East \& North Africa  15238.238677  17294.100111  18233.010938   
+         North America               61374.823135  62652.689496  63201.433145   
+         
+                                             2013          2014          2015  \textbackslash{}
+         Region                                                                 
+         East Asia \& Pacific         16684.012118  16763.902823  15434.630572   
+         Europe \& Central Asia       34107.082513  35082.975616  30850.869561   
+         Latin America \& Caribbean   11484.794785  11738.649036  11611.104311   
+         Middle East \& North Africa  18262.322062  17914.787434  14890.415134   
+         North America               63786.543630  52934.234588  50149.263410   
+         
+                                             2016          2017          2018  
+         Region                                                                
+         East Asia \& Pacific         15517.729996  16482.449989  16510.399708  
+         Europe \& Central Asia       31238.590241  28329.985460  27159.064196  
+         Latin America \& Caribbean   11579.845692  13105.703282  10029.996664  
+         Middle East \& North Africa  14428.033153  15315.010092  17209.974086  
+         North America               50092.051392  52498.928544  54425.781096  
+         
+         [5 rows x 59 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}192}]:} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/gdp\PYZus{}per\PYZus{}capita.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x16bdb02fda0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{}\label{section}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\section{Access to electricity :}\label{access-to-electricity}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{elect\PYZus{}access} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}EG.ELC.ACCS.ZS\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}427235.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{elect\PYZus{}access}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:}   Country Name Country Code                           Indicator Name  \textbackslash{}
+         0        Aruba          ABW  Access to electricity (\% of population)   
+         1  Afghanistan          AFG  Access to electricity (\% of population)   
+         2       Angola          AGO  Access to electricity (\% of population)   
+         3      Albania          ALB  Access to electricity (\% of population)   
+         4      Andorra          AND  Access to electricity (\% of population)   
+         
+            Indicator Code  1960  1961  1962  1963  1964  1965     {\ldots}       \textbackslash{}
+         0  EG.ELC.ACCS.ZS   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+         1  EG.ELC.ACCS.ZS   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+         2  EG.ELC.ACCS.ZS   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+         3  EG.ELC.ACCS.ZS   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+         4  EG.ELC.ACCS.ZS   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+         
+                  2011        2012        2013   2014   2015        2016       2017  \textbackslash{}
+         0  100.000000  100.000000  100.000000  100.0  100.0  100.000000  100.00000   
+         1   43.222019   69.100000   70.153481   89.5   71.5   97.700000   97.70000   
+         2   34.600000   35.670788   36.878685   32.0   42.0   40.624527   41.88623   
+         3  100.000000  100.000000  100.000000  100.0  100.0  100.000000  100.00000   
+         4  100.000000  100.000000  100.000000  100.0  100.0  100.000000  100.00000   
+         
+            2018  2019  Unnamed: 64  
+         0   NaN   NaN          NaN  
+         1   NaN   NaN          NaN  
+         2   NaN   NaN          NaN  
+         3   NaN   NaN          NaN  
+         4   NaN   NaN          NaN  
+         
+         [5 rows x 65 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{elect\PYZus{}access} \PY{o}{=} \PY{n}{elect\PYZus{}access}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{metadata\PYZus{}countries}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{df\PYZus{}elect\PYZus{}access} \PY{o}{=} \PY{n}{elect\PYZus{}access}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{df\PYZus{}elect\PYZus{}access}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}93}]:}                             1960  1961  1962  1963  1964  1965  1966  1967  \textbackslash{}
+         Region                                                                       
+         East Asia \& Pacific          NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   
+         Europe \& Central Asia        NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   
+         Latin America \& Caribbean    NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   
+         Middle East \& North Africa   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   
+         North America                NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   
+         
+                                     1968  1969     {\ldots}            2008        2009  \textbackslash{}
+         Region                                     {\ldots}                               
+         East Asia \& Pacific          NaN   NaN     {\ldots}       81.991984   81.711086   
+         Europe \& Central Asia        NaN   NaN     {\ldots}       99.894192   99.914233   
+         Latin America \& Caribbean    NaN   NaN     {\ldots}       92.411054   92.723906   
+         Middle East \& North Africa   NaN   NaN     {\ldots}       93.975282   94.015756   
+         North America                NaN   NaN     {\ldots}      100.000000  100.000000   
+         
+                                           2010        2011        2012        2013  \textbackslash{}
+         Region                                                                       
+         East Asia \& Pacific          81.954970   83.857607   84.980764   85.652169   
+         Europe \& Central Asia        99.906119   99.938484   99.972229   99.973719   
+         Latin America \& Caribbean    92.752236   94.079773   94.604554   95.212376   
+         Middle East \& North Africa   94.317698   94.406039   94.501379   94.961666   
+         North America               100.000000  100.000000  100.000000  100.000000   
+         
+                                           2014        2015        2016        2017  
+         Region                                                                      
+         East Asia \& Pacific          86.814016   88.639931   89.996176   91.619467  
+         Europe \& Central Asia        99.979751   99.993268   99.997941   99.987719  
+         Latin America \& Caribbean    95.605395   96.050948   96.500747   97.031717  
+         Middle East \& North Africa   94.190357   94.970712   95.051857   95.199380  
+         North America               100.000000  100.000000  100.000000  100.000000  
+         
+         [5 rows x 58 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{df\PYZus{}elect\PYZus{}access}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}95}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x16bdb3d4550>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{}\label{section}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\#
+
+Electric power consumption :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{elec\PYZus{}pw\PYZus{}cm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}EG.USE.ELEC.KH.PC\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}423773.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{elec\PYZus{}pw\PYZus{}cm}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}107}]:}   Country Name Country Code                               Indicator Name  \textbackslash{}
+          0        Aruba          ABW  Electric power consumption (kWh per capita)   
+          1  Afghanistan          AFG  Electric power consumption (kWh per capita)   
+          2       Angola          AGO  Electric power consumption (kWh per capita)   
+          3      Albania          ALB  Electric power consumption (kWh per capita)   
+          4      Andorra          AND  Electric power consumption (kWh per capita)   
+          
+                Indicator Code  1960  1961  1962  1963  1964  1965     {\ldots}       \textbackslash{}
+          0  EG.USE.ELEC.KH.PC   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+          1  EG.USE.ELEC.KH.PC   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+          2  EG.USE.ELEC.KH.PC   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+          3  EG.USE.ELEC.KH.PC   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+          4  EG.USE.ELEC.KH.PC   NaN   NaN   NaN   NaN   NaN   NaN     {\ldots}        
+          
+                    2011         2012         2013         2014  2015  2016  2017  2018  \textbackslash{}
+          0          NaN          NaN          NaN          NaN   NaN   NaN   NaN   NaN   
+          1          NaN          NaN          NaN          NaN   NaN   NaN   NaN   NaN   
+          2   207.013343   219.253430   280.214547   312.228825   NaN   NaN   NaN   NaN   
+          3  2205.703920  2118.327776  2533.252829  2309.366503   NaN   NaN   NaN   NaN   
+          4          NaN          NaN          NaN          NaN   NaN   NaN   NaN   NaN   
+          
+             2019  Unnamed: 64  
+          0   NaN          NaN  
+          1   NaN          NaN  
+          2   NaN          NaN  
+          3   NaN          NaN  
+          4   NaN          NaN  
+          
+          [5 rows x 65 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{elec\PYZus{}pw\PYZus{}cm} \PY{o}{=} \PY{n}{elec\PYZus{}pw\PYZus{}cm}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{metadata\PYZus{}countries}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{df\PYZus{}elec\PYZus{}pw\PYZus{}cm} \PY{o}{=} \PY{n}{elec\PYZus{}pw\PYZus{}cm}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{df\PYZus{}elec\PYZus{}pw\PYZus{}cm}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}110}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x16bdb5e73c8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{}\label{section}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{Alternative and nuclear
+consumption}\label{alternative-and-nuclear-consumption}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}259}]:} \PY{n}{alt\PYZus{}cmp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}EG.USE.COMM.CL.ZS\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}511784.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}260}]:} \PY{n}{alt\PYZus{}cmp} \PY{o}{=} \PY{n}{alt\PYZus{}cmp}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{metadata\PYZus{}countries}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}275}]:} \PY{n}{df\PYZus{}alt\PYZus{}cmp} \PY{o}{=} \PY{n}{alt\PYZus{}cmp}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}280}]:} \PY{n}{df\PYZus{}alt\PYZus{}cmp}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}280}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x16be058f208>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}288}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}data\PYZus{}to\PYZus{}visualise}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+              
+              \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+              \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{metadata\PYZus{}countries}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{data}
+\end{Verbatim}
+
+
+    \section{}\label{section}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \section{Fuel exports}\label{fuel-exports}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}291}]:} \PY{n}{fuel\PYZus{}exports} \PY{o}{=} \PY{n}{get\PYZus{}data\PYZus{}to\PYZus{}visualise}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}TX.VAL.FUEL.ZS.UN\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}511909.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}295}]:} \PY{n}{fuel\PYZus{}exports} \PY{o}{=} \PY{n}{get\PYZus{}data\PYZus{}to\PYZus{}visualise}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}EG.USE.COMM.FO.ZS\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}511727.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}296}]:} \PY{n}{fuel\PYZus{}exports}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}296}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x16be22d0ef0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \section{RENEW PERCENTAGE ENERGY}\label{renew-percentage-energy}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}289}]:} \PY{n}{rnew\PYZus{}prc} \PY{o}{=} \PY{n}{get\PYZus{}data\PYZus{}to\PYZus{}visualise}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/API\PYZus{}EG.ELC.RNEW.ZS\PYZus{}DS2\PYZus{}en\PYZus{}csv\PYZus{}v2\PYZus{}511934.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}290}]:} \PY{n}{rnew\PYZus{}prc}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}290}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x16be1e8c048>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{}\label{section}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\#
+
+Start part 2: Forecast
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{df\PYZus{}elect\PYZus{}access}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{n}{target} \PY{o}{=} \PY{n}{Y}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Y}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{1.80}\PY{p}{)}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}169}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}169}]:} [<matplotlib.lines.Line2D at 0x16bdeffe470>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}184}]:} \PY{n}{population\PYZus{}region} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/population\PYZus{}region.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}188}]:} \PY{n}{population\PYZus{}region} \PY{o}{=} \PY{n}{population\PYZus{}region}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}204}]:} array([ 1,  4,  9, 16])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}200}]:} \PY{n}{population\PYZus{}region}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{East Asia \PYZam{} Pacific}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}200}]:} Unnamed: 0
+          1960    1.030256e+09
+          1961    1.033472e+09
+          1962    1.047566e+09
+          1963    1.072954e+09
+          1964    1.097973e+09
+          1965    1.124042e+09
+          1966    1.153532e+09
+          1967    1.182061e+09
+          1968    1.210984e+09
+          1969    1.243401e+09
+          1970    1.275813e+09
+          1971    1.309172e+09
+          1972    1.340715e+09
+          1973    1.370684e+09
+          1974    1.400473e+09
+          1975    1.427285e+09
+          1976    1.451169e+09
+          1977    1.473719e+09
+          1978    1.496186e+09
+          1979    1.519063e+09
+          1980    1.541491e+09
+          1981    1.564760e+09
+          1982    1.590324e+09
+          1983    1.615887e+09
+          1984    1.640202e+09
+          1985    1.665104e+09
+          1986    1.691579e+09
+          1987    1.719455e+09
+          1988    1.747590e+09
+          1989    1.775104e+09
+          1990    1.801915e+09
+          1991    1.827719e+09
+          1992    1.851795e+09
+          1993    1.875024e+09
+          1994    1.898282e+09
+          1995    1.921173e+09
+          1996    1.943722e+09
+          1997    1.965715e+09
+          1998    1.986872e+09
+          1999    2.006642e+09
+          2000    2.025468e+09
+          2001    2.043573e+09
+          2002    2.060729e+09
+          2003    2.077048e+09
+          2004    2.092818e+09
+          2005    2.108424e+09
+          2006    2.123929e+09
+          2007    2.138884e+09
+          2008    2.154125e+09
+          2009    2.168990e+09
+          2010    2.183746e+09
+          2011    2.198493e+09
+          2012    2.213557e+09
+          2013    2.228703e+09
+          2014    2.244090e+09
+          2015    2.259394e+09
+          2016    2.275006e+09
+          2017    2.290650e+09
+          Name: East Asia \& Pacific, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}207}]:} \PY{k}{for} \PY{n}{region} \PY{o+ow}{in} \PY{n}{df\PYZus{}elect\PYZus{}access}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{columns} \PY{p}{:}
+              \PY{n}{elect\PYZus{}pop} \PY{o}{=} \PY{n}{population\PYZus{}region}\PY{p}{[}\PY{n}{region}\PY{p}{]} \PY{o}{*} \PY{n}{df\PYZus{}elect\PYZus{}access}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{n}{region}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}171}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df\PYZus{}elect\PYZus{}access}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{index}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{target}\PY{p}{)}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}172}]:} \PY{n}{reg} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}182}]:} \PY{n}{pred} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}183}]:} \PY{n}{pred}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}183}]:} array([ 89.4609816 ,  90.16362912,  90.86627664,  91.56892416,
+                  92.27157168,  92.97421921,  93.67686673,  94.37951425,
+                  95.08216177,  95.78480929,  96.48745681,  97.19010434,
+                  97.89275186,  98.59539938,  99.2980469 , 100.00069442,
+                 100.70334194, 101.40598947, 102.10863699, 102.81128451,
+                 103.51393203, 104.21657955, 104.91922707, 105.6218746 ,
+                 106.32452212, 107.02716964, 107.72981716, 108.43246468,
+                 109.1351122 , 109.83775972, 110.54040725])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}244}]:} \PY{n}{test\PYZus{}years} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2019}\PY{p}{,} \PY{l+m+mi}{2050}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}246}]:} \PY{n}{test\PYZus{}years}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}246}]:} array([[2019],
+                 [2020],
+                 [2021],
+                 [2022],
+                 [2023],
+                 [2024],
+                 [2025],
+                 [2026],
+                 [2027],
+                 [2028],
+                 [2029],
+                 [2030],
+                 [2031],
+                 [2032],
+                 [2033],
+                 [2034],
+                 [2035],
+                 [2036],
+                 [2037],
+                 [2038],
+                 [2039],
+                 [2040],
+                 [2041],
+                 [2042],
+                 [2043],
+                 [2044],
+                 [2045],
+                 [2046],
+                 [2047],
+                 [2048],
+                 [2049]])
+\end{Verbatim}
+            
+    \subsubsection{GDP per capita}\label{gdp-per-capita}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}250}]:} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/dsp\PYZus{}per\PYZus{}cap.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}256}]:} \PY{n}{X\PYZus{}gdp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{index}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}258}]:} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}258}]:}                                    1960         1961         1962  \textbackslash{}
+          Region                                                              
+          East Asia \& Pacific          522.624813   533.937254   544.951222   
+          Europe \& Central Asia       1150.292790  1218.420568  1311.685986   
+          Latin America \& Caribbean    396.673866   415.127294   466.399424   
+          Middle East \& North Africa   375.088016   408.704145   355.665333   
+          North America               2454.762782  2434.174770  2522.410576   
+          South Asia                    84.413563    87.579749    88.618436   
+          Sub-Saharan Africa           141.326953   145.937695   148.077933   
+          
+                                             1963         1964         1965  \textbackslash{}
+          Region                                                              
+          East Asia \& Pacific          592.145607   634.790004   796.316505   
+          Europe \& Central Asia       1421.599902  1590.503651  1730.067063   
+          Latin America \& Caribbean    473.590122   509.994628   516.001997   
+          Middle East \& North Africa   396.433251   430.377669   784.423575   
+          North America               2601.767681  2789.181213  2974.045130   
+          South Asia                    89.917488    94.658274   110.417746   
+          Sub-Saharan Africa           156.525596   163.291646   178.603988   
+          
+                                             1966         1967         1968  \textbackslash{}
+          Region                                                              
+          East Asia \& Pacific          849.709028   804.373900   858.909366   
+          Europe \& Central Asia       1873.189837  1974.352931  2013.470538   
+          Latin America \& Caribbean    545.009019   562.877151   581.856093   
+          Middle East \& North Africa   804.185981   774.244552   761.499350   
+          North America               3290.167252  3528.381335  3680.441402   
+          South Asia                   116.509821   125.261603   119.349317   
+          Sub-Saharan Africa           183.834669   180.177353   185.842615   
+          
+                                             1969      {\ldots}               2009  \textbackslash{}
+          Region                                       {\ldots}                      
+          East Asia \& Pacific          920.105829      {\ldots}       11517.670362   
+          Europe \& Central Asia       2192.322484      {\ldots}       30594.573082   
+          Latin America \& Caribbean    638.406977      {\ldots}        9627.737157   
+          Middle East \& North Africa   788.926413      {\ldots}       13877.869220   
+          North America               3968.968603      {\ldots}       58778.784939   
+          South Asia                   125.363513      {\ldots}        1783.727659   
+          Sub-Saharan Africa           198.871866      {\ldots}        2067.099001   
+          
+                                              2010          2011          2012  \textbackslash{}
+          Region                                                                 
+          East Asia \& Pacific         13298.665824  15332.885241  16332.057612   
+          Europe \& Central Asia       30908.387552  33909.944243  32089.480655   
+          Latin America \& Caribbean   10246.638009  11052.646899  11319.298502   
+          Middle East \& North Africa  15238.238677  17294.100111  18233.010938   
+          North America               61374.823135  62652.689496  63201.433145   
+          South Asia                   2056.543370   2236.640516   2260.120459   
+          Sub-Saharan Africa           2308.663257   2663.719664   2689.905602   
+          
+                                              2013          2014          2015  \textbackslash{}
+          Region                                                                 
+          East Asia \& Pacific         16684.012118  16763.902823  15434.630572   
+          Europe \& Central Asia       34107.082513  35082.975616  30850.869561   
+          Latin America \& Caribbean   11484.794785  11738.649036  11611.104311   
+          Middle East \& North Africa  18262.322062  17914.787434  14890.415134   
+          North America               63786.543630  52934.234588  50149.263410   
+          South Asia                   2383.025157   2546.142616   2661.101017   
+          Sub-Saharan Africa           2705.135009   2707.893783   2283.738707   
+          
+                                              2016          2017          2018  
+          Region                                                                
+          East Asia \& Pacific         15517.729996  16482.449989  16510.399708  
+          Europe \& Central Asia       31238.590241  28329.985460  27159.064196  
+          Latin America \& Caribbean   11579.845692  13105.703282  10029.996664  
+          Middle East \& North Africa  14428.033153  15315.010092  17209.974086  
+          North America               50092.051392  52498.928544  54425.781096  
+          South Asia                   2750.711892   2970.772733   3052.478261  
+          Sub-Saharan Africa           2194.331701   2407.446906   2507.301090  
+          
+          [7 rows x 59 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}257}]:} \PY{n}{X\PYZus{}gdp}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}257}]:} array([['1960'],
+                 ['1961'],
+                 ['1962'],
+                 ['1963'],
+                 ['1964'],
+                 ['1965'],
+                 ['1966'],
+                 ['1967'],
+                 ['1968'],
+                 ['1969'],
+                 ['1970'],
+                 ['1971'],
+                 ['1972'],
+                 ['1973'],
+                 ['1974'],
+                 ['1975'],
+                 ['1976'],
+                 ['1977'],
+                 ['1978'],
+                 ['1979'],
+                 ['1980'],
+                 ['1981'],
+                 ['1982'],
+                 ['1983'],
+                 ['1984'],
+                 ['1985'],
+                 ['1986'],
+                 ['1987'],
+                 ['1988'],
+                 ['1989'],
+                 ['1990'],
+                 ['1991'],
+                 ['1992'],
+                 ['1993'],
+                 ['1994'],
+                 ['1995'],
+                 ['1996'],
+                 ['1997'],
+                 ['1998'],
+                 ['1999'],
+                 ['2000'],
+                 ['2001'],
+                 ['2002'],
+                 ['2003'],
+                 ['2004'],
+                 ['2005'],
+                 ['2006'],
+                 ['2007'],
+                 ['2008'],
+                 ['2009'],
+                 ['2010'],
+                 ['2011'],
+                 ['2012'],
+                 ['2013'],
+                 ['2014'],
+                 ['2015'],
+                 ['2016'],
+                 ['2017'],
+                 ['2018']], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}249}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}249}]:} 59
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{X\PYZus{}gdp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{index}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{Y\PYZus{}gdp} \PY{o}{=} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{test\PYZus{}years} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2019}\PY{p}{,} \PY{l+m+mi}{2050}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{reg\PYZus{}gdp} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}gdp}\PY{p}{,} \PY{n}{Y\PYZus{}gdp}\PY{p}{)}
+        \PY{n}{predict\PYZus{}gdp} \PY{o}{=} \PY{n}{reg\PYZus{}gdp}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}years}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}247}]:} \PY{n}{x} \PY{o}{=} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{index}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}251}]:} \PY{n}{X\PYZus{}gdp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{index}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}252}]:} \PY{n}{Y\PYZus{}gdp} \PY{o}{=} \PY{n}{df\PYZus{}gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}253}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Y\PYZus{}gdp}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}253}]:} [<matplotlib.lines.Line2D at 0x16bdf1aada0>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_83_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}254}]:} \PY{n}{reg\PYZus{}gdp} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}gdp}\PY{p}{,} \PY{n}{Y\PYZus{}gdp}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}255}]:} \PY{n}{predict\PYZus{}gdp} \PY{o}{=} \PY{n}{reg\PYZus{}gdp}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}years}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}235}]:} \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}238}]:} \PY{n}{a} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{b}\PY{p}{)} \PY{o}{+} \PY{n+nb}{list}\PY{p}{(}\PY{n}{predict\PYZus{}gdp}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}236}]:} \PY{n}{predict\PYZus{}gdp}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}236}]:} array([20276.58366602, 20656.24012027, 21035.89657452, 21415.55302877,
+                 21795.20948301, 22174.86593726, 22554.52239151, 22934.17884576,
+                 23313.83530001, 23693.49175426, 24073.1482085 , 24452.80466275,
+                 24832.461117  , 25212.11757125, 25591.7740255 , 25971.43047975,
+                 26351.08693399, 26730.74338824, 27110.39984249, 27490.05629674,
+                 27869.71275099, 28249.36920524, 28629.02565948, 29008.68211373,
+                 29388.33856798, 29767.99502223, 30147.65147648, 30527.30793072,
+                 30906.96438497, 31286.62083922, 31666.27729347])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}304}]:} \PY{n}{x1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+          \PY{n}{x2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predict\PYZus{}gdp}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}305}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{predict\PYZus{}gdp}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-305-c2ad0c401de7> in <module>()
+          1 plt.plot(x1, list(b))
+    ----> 2 plt.plot(x2, list(predict\_gdp), color='red')
+          3 plt.show()
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}pyplot.py in plot(*args, **kwargs)
+       3259                       mplDeprecation)
+       3260     try:
+    -> 3261         ret = ax.plot(*args, **kwargs)
+       3262     finally:
+       3263         ax.\_hold = washold
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}\_\_init\_\_.py in inner(ax, *args, **kwargs)
+       1715                     warnings.warn(msg \% (label\_namer, func.\_\_name\_\_),
+       1716                                   RuntimeWarning, stacklevel=2)
+    -> 1717             return func(ax, *args, **kwargs)
+       1718         pre\_doc = inner.\_\_doc\_\_
+       1719         if pre\_doc is None:
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py in plot(self, *args, **kwargs)
+       1370         kwargs = cbook.normalize\_kwargs(kwargs, \_alias\_map)
+       1371 
+    -> 1372         for line in self.\_get\_lines(*args, **kwargs):
+       1373             self.add\_line(line)
+       1374             lines.append(line)
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_base.py in \_grab\_next\_args(self, *args, **kwargs)
+        402                 this += args[0],
+        403                 args = args[1:]
+    --> 404             for seg in self.\_plot\_args(this, kwargs):
+        405                 yield seg
+        406 
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_base.py in \_plot\_args(self, tup, kwargs)
+        382             x, y = index\_of(tup[-1])
+        383 
+    --> 384         x, y = self.\_xy\_from\_xy(x, y)
+        385 
+        386         if self.command == 'plot':
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_base.py in \_xy\_from\_xy(self, x, y)
+        241         if x.shape[0] != y.shape[0]:
+        242             raise ValueError("x and y must have same first dimension, but "
+    --> 243                              "have shapes \{\} and \{\}".format(x.shape, y.shape))
+        244         if x.ndim > 2 or y.ndim > 2:
+        245             raise ValueError("x and y can be no greater than 2-D, but have "
+    
+
+        ValueError: x and y must have same first dimension, but have shapes (32,) and (31,)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_90_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
